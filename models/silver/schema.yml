@@ -12,7 +12,7 @@ models:
           - unique
       - name: totalPrice
         tests:
-          - non_negative
+          - non_zero
       - name: is_active
         tests:
           - not_null

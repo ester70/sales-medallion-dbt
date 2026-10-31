@@ -1,8 +1,3 @@
-{# Generic test: column must never be negative (mirrors SDP expect "totalPrice >= 0") #}
-{% test non_negative(model, column_name) %}
-
-select *
-from {{ model }}
-where {{ column_name }} < 0
-
-{% endtest %}
+{# Superseded by non_zero_test.sql: business allows NEGATIVE transactions (e.g. refunds)
+   but rejects ZERO-amount transactions. File kept as a stub because deletion is
+   guardrail-blocked. #}

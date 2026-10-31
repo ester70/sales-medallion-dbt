@@ -48,7 +48,7 @@ Run `dbt run` hourly (Databricks Job with a dbt task, or cron). Delta resolves
 job gives hourly-restorable states.
 
 ## Tests
-`dbt test` — not_null / unique / non_negative across all layers.
+`dbt test` — not_null / unique / non_zero across all layers (zero-amount transactions rejected; negative amounts e.g. refunds allowed).
 
 ## DAG
 ```

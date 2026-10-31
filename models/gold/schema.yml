@@ -70,4 +70,4 @@ models:
           - not_null
       - name: total_price
         tests:
-          - non_negative
+          - non_zero
