@@ -1,0 +1,73 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: Customer dimension - one row per active customer
+    columns:
+      - name: customerID
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_franchise
+    description: Franchise dimension - one row per active franchise
+    columns:
+      - name: franchiseID
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_product
+    description: Product dimension - one row per active product
+    columns:
+      - name: product
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_payment_method
+    description: Payment method dimension
+    columns:
+      - name: paymentMethod
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_date
+    description: Date dimension with calendar attributes
+    columns:
+      - name: sale_date
+        tests:
+          - not_null
+          - unique
+
+  - name: fact_sales
+    description: >
+      Sales fact table - measures with natural-key foreign keys to dimensions,
+      plus the soft-delete flag (is_active) inherited from silver.
+    columns:
+      - name: transactionID
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        tests:
+          - not_null
+      - name: franchise_id
+        tests:
+          - not_null
+      - name: product_name
+        tests:
+          - not_null
+      - name: sale_date
+        tests:
+          - not_null
+      - name: payment_method
+        tests:
+          - not_null
+      - name: is_active
+        tests:
+          - not_null
+      - name: total_price
+        tests:
+          - non_negative

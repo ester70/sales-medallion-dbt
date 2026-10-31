@@ -1,0 +1,12 @@
+sales_medallion_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: databricks
+      host: dbc-805a4f2c-a544.cloud.databricks.com
+      # SQL Warehouses -> your warehouse -> Connection details -> HTTP Path
+      http_path: /sql/1.0/warehouses/<YOUR_WAREHOUSE_ID>
+      token: "{{ env_var('DBT_TOKEN') }}"
+      catalog: main
+      schema: default
+      threads: 4

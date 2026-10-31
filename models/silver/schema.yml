@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: silver_sales_transactions_clean
+    description: >
+      Cleaned and validated sales transactions with quality filters, soft-delete
+      flag (is_active), and sale_date derived from dateTime for the date dimension.
+    columns:
+      - name: transactionID
+        tests:
+          - not_null
+          - unique
+      - name: totalPrice
+        tests:
+          - non_negative
+      - name: is_active
+        tests:
+          - not_null
+      - name: sale_date
+        tests:
+          - not_null

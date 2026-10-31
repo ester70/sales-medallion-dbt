@@ -1,0 +1,26 @@
+name: sales_medallion_dbt
+version: '1.0.0'
+config-version: 2
+profile: sales_medallion_dbt
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+
+# NOTE: schemas are prefixed with dbt_ so this project can run side-by-side
+# with the existing Spark Declarative Pipeline (main.bronze / main.silver / main.gold).
+# To fully replace the SDP pipeline, stop it and change +schema values below.
+models:
+  sales_medallion_dbt:
+    bronze:
+      +schema: dbt_bronze
+      +materialized: incremental
+      +incremental_strategy: merge
+      +unique_key: transactionID
+    silver:
+      +schema: dbt_silver
+      +materialized: incremental
+      +incremental_strategy: merge
+      +unique_key: transactionID
+    gold:
+      +schema: dbt_gold
+      +materialized: table

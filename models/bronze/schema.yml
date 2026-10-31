@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: bakehouse
+    description: Databricks sample bakehouse sales dataset
+    database: samples
+    schema: bakehouse
+    tables:
+      - name: sales_transactions
+
+models:
+  - name: bronze_sales_transactions
+    description: >
+      Raw bakehouse sales as a Delta table with soft-delete tracking (is_active).
+      Incremental + merge on transactionID; rows that disappeared upstream are
+      flagged is_active = false, never physically deleted.
+    columns:
+      - name: transactionID
+        description: Primary business key of the transaction
+        tests:
+          - not_null
+          - unique
+      - name: is_active
+        description: Soft-delete flag - false when the row no longer exists upstream
+        tests:
+          - not_null
