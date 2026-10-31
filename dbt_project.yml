@@ -6,9 +6,8 @@ profile: sales_medallion_dbt
 model-paths: ["models"]
 macro-paths: ["macros"]
 
-# NOTE: schemas are prefixed with dbt_ so this project can run side-by-side
-# with the existing Spark Declarative Pipeline (main.bronze / main.silver / main.gold).
-# To fully replace the SDP pipeline, stop it and change +schema values below.
+# Schemas are prefixed dbt_ (this project fully replaced the former SDP pipeline,
+# which has been removed -- dbt is the sole medallion pipeline now).
 models:
   sales_medallion_dbt:
     bronze:
