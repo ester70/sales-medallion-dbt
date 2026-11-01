@@ -7,6 +7,8 @@ sources:
     schema: bakehouse
     tables:
       - name: sales_transactions
+      - name: sales_customers
+      - name: sales_franchises
 
 models:
   - name: bronze_sales_transactions
@@ -17,6 +19,38 @@ models:
     columns:
       - name: transactionID
         description: Primary business key of the transaction
+        tests:
+          - not_null
+          - unique
+      - name: is_active
+        description: Soft-delete flag - false when the row no longer exists upstream
+        tests:
+          - not_null
+
+  - name: bronze_sales_customers
+    description: >
+      Bronze copy of the bakehouse customers reference table (all source columns)
+      with soft-delete tracking (is_active). Incremental + merge on customerID;
+      rows that disappeared upstream are flagged is_active = false, never physically deleted.
+    columns:
+      - name: customerID
+        description: Primary business key of the customer
+        tests:
+          - not_null
+          - unique
+      - name: is_active
+        description: Soft-delete flag - false when the row no longer exists upstream
+        tests:
+          - not_null
+
+  - name: bronze_sales_franchises
+    description: >
+      Bronze copy of the bakehouse franchises reference table (all source columns)
+      with soft-delete tracking (is_active). Incremental + merge on franchiseID;
+      rows that disappeared upstream are flagged is_active = false, never physically deleted.
+    columns:
+      - name: franchiseID
+        description: Primary business key of the franchise
         tests:
           - not_null
           - unique

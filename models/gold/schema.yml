@@ -8,6 +8,20 @@ models:
         tests:
           - not_null
           - unique
+      - name: first_name
+        description: Customer first name (from bakehouse sales_customers)
+      - name: last_name
+        description: Customer last name (from bakehouse sales_customers)
+      - name: city
+        description: Customer home city
+      - name: state
+        description: Customer home state/province
+      - name: country
+        description: Customer home country
+      - name: continent
+        description: Customer home continent
+      - name: gender
+        description: Customer gender
 
   - name: dim_franchise
     description: Franchise dimension - one row per active franchise
@@ -16,6 +30,16 @@ models:
         tests:
           - not_null
           - unique
+      - name: franchise_name
+        description: Franchise display name (from bakehouse sales_franchises)
+      - name: city
+        description: Franchise city
+      - name: district
+        description: Franchise district/area - used for region breakdowns
+      - name: country
+        description: Franchise country
+      - name: franchise_size
+        description: Franchise size category
 
   - name: dim_product
     description: Product dimension - one row per active product
