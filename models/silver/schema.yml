@@ -19,3 +19,33 @@ models:
       - name: sale_date
         tests:
           - not_null
+
+  - name: silver_sales_customers_clean
+    description: >
+      Cleaned and validated customers: trimmed text fields, lowercased emails,
+      quality gate on customerID (rows with an empty/NULL unique key are rejected
+      here but preserved in bronze), and the soft-delete flag (is_active)
+      propagated from bronze via merge.
+    columns:
+      - name: customerID
+        tests:
+          - not_null
+          - unique
+      - name: is_active
+        tests:
+          - not_null
+
+  - name: silver_sales_franchises_clean
+    description: >
+      Cleaned and validated franchises: trimmed text fields, quality gate on
+      franchiseID (rows with an empty/NULL unique key are rejected here but
+      preserved in bronze), and the soft-delete flag (is_active) propagated
+      from bronze via merge.
+    columns:
+      - name: franchiseID
+        tests:
+          - not_null
+          - unique
+      - name: is_active
+        tests:
+          - not_null

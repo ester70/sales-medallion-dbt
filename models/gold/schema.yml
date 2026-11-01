@@ -9,9 +9,9 @@ models:
           - not_null
           - unique
       - name: first_name
-        description: Customer first name (from bakehouse sales_customers)
+        description: Customer first name (from silver_sales_customers_clean)
       - name: last_name
-        description: Customer last name (from bakehouse sales_customers)
+        description: Customer last name (from silver_sales_customers_clean)
       - name: city
         description: Customer home city
       - name: state
@@ -31,7 +31,7 @@ models:
           - not_null
           - unique
       - name: franchise_name
-        description: Franchise display name (from bakehouse sales_franchises)
+        description: Franchise display name (from silver_sales_franchises_clean)
       - name: city
         description: Franchise city
       - name: district
